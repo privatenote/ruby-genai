@@ -32,7 +32,7 @@ module Google
           end
         end
 
-        response = @api_client.request(:post, "v1alpha/authTokens", body)
+        response = @api_client.request(:post, "v1alpha/authTokens", body: body)
         Types::AuthToken.new(JSON.parse(response.body))
       end
     end

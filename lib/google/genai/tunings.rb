@@ -21,7 +21,7 @@ module Google
         }
         # TODO: Add other config options
 
-        response = @api_client.request(:post, "v1beta/tuningJobs", body)
+        response = @api_client.request(:post, "v1beta/tuningJobs", body: body)
         Types::TuningJob.new(JSON.parse(response.body))
       end
 
@@ -56,7 +56,7 @@ module Google
 
       def cancel(name:, config: nil)
         raise "Tuning is only supported for Vertex AI" unless @api_client.vertexai
-        @api_client.request(:post, "v1beta/#{name}:cancel", {})
+        @api_client.request(:post, "v1beta/#{name}:cancel", body: {})
         nil
       end
     end

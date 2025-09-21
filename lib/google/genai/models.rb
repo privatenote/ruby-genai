@@ -17,7 +17,7 @@ module Google
         }
         body[:generationConfig] = config if config
 
-        response = @api_client.request(:post, path, body)
+        response = @api_client.request(:post, path, body: body)
         Types::GenerateContentResponse.new(JSON.parse(response.body))
       end
 

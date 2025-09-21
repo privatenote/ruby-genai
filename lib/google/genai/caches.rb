@@ -11,7 +11,7 @@ module Google
       end
 
       def create(model:, config:)
-        response = @api_client.request(:post, "v1beta/cachedContents", { model: model }.merge(config))
+        response = @api_client.request(:post, "v1beta/cachedContents", body: { model: model }.merge(config))
         Types::CachedContent.new(JSON.parse(response.body))
       end
 
@@ -42,7 +42,7 @@ module Google
       end
 
       def update(name:, config:)
-        response = @api_client.request(:patch, "v1beta/#{name}", config)
+        response = @api_client.request(:patch, "v1beta/#{name}", body: config)
         Types::CachedContent.new(JSON.parse(response.body))
       end
 

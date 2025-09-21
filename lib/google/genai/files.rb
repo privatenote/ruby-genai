@@ -21,7 +21,27 @@ module Google
         file_size = File.size(file_path)
 
         response_data = @api_client.upload_file(file_path, file_size, mime_type, display_name: display_name)
-        Types::File.new(response_data['file'])
+        file_info = Types::File.new(response_data['file'])
+
+        # Poll for file processing to complete with exponential backoff
+        timeout = 120 # 2 minutes
+        start_time = Time.now
+        delay = 0.1 # Initial delay of 100ms
+
+        loop do
+          file_info = get(name: file_info.name)
+          case file_info.state
+          when 'ACTIVE'
+            return file_info
+          when 'FAILED'
+            raise "File processing failed: #{file_info.error}"
+          end
+
+          raise "File processing timed out" if Time.now - start_time > timeout
+
+          sleep delay
+          delay = [delay * 1.5, 5].min # Increase delay, but cap at 5 seconds
+        end
       end
 
       def get(name:, config: nil)

@@ -28,7 +28,7 @@ module Google
           faraday.request :retry
           faraday.headers['Content-Type'] = 'application/json'
           if @api_key
-            faraday.params['key'] = @api_key
+            faraday.headers['x-goog-api-key'] = @api_key
           elsif @vertexai
             scopes = ['https://www.googleapis.com/auth/cloud-platform']
             authorizer = Google::Auth.get_application_default(scopes)

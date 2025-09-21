@@ -60,6 +60,11 @@ module Google
       class GenerateContentResponse < Base
         attr_accessor :candidates
 
+        def initialize(attributes = {})
+          super
+          self.candidates = Array(self.candidates).map { |c| c.is_a?(Candidate) ? c : Candidate.new(c) }
+        end
+
         def text
           candidates&.first&.content&.parts&.map(&:text)&.join
         end
@@ -67,6 +72,11 @@ module Google
 
       class Candidate < Base
         attr_accessor :content, :finish_reason, :safety_ratings
+
+        def initialize(attributes = {})
+          super
+          self.content = Content.new(self.content) if self.content.is_a?(Hash)
+        end
       end
 
       class File < Base

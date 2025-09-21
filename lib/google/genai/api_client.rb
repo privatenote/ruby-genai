@@ -10,7 +10,32 @@ require_relative "errors"
 module Google
   module Genai
     class ApiClient
-      # ... (previous code) ...
+      attr_reader :api_key, :vertexai
+
+      def initialize(api_key: nil, vertexai: nil, project: nil, location: nil, http_options: nil)
+        @api_key = api_key
+        @vertexai = vertexai
+        @http_options = http_options || {}
+
+        base_url = if @vertexai
+                     # TODO: Handle global location
+                     "https://#{location}-aiplatform.googleapis.com/"
+                   else
+                     "https://generativelanguage.googleapis.com/"
+                   end
+
+        @connection = Faraday.new(url: base_url) do |faraday|
+          faraday.request :retry
+          faraday.headers['Content-Type'] = 'application/json'
+          if @api_key
+            faraday.params['key'] = @api_key
+          elsif @vertexai
+            scopes = ['https://www.googleapis.com/auth/cloud-platform']
+            authorizer = Google::Auth.get_application_default(scopes)
+            faraday.request :authorization, 'Bearer', -> { authorizer.fetch_access_token!['access_token'] }
+          end
+        end
+      end
 
       def upload_file(file_path, file_size, mime_type, display_name: nil)
         # 1. Start resumable upload

@@ -6,6 +6,7 @@ module Google
   module Genai
     class Client
       def initialize(api_key: nil, vertexai: nil, credentials: nil, project: nil, location: nil, http_options: nil)
+        api_key ||= ENV['GOOGLE_API_KEY'] || ENV['GEMINI_API_KEY']
         @api_client = ApiClient.new(
           api_key: api_key,
           vertexai: vertexai,

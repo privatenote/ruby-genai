@@ -57,6 +57,8 @@ module Google
             item # Assumes it's already in the correct format
           when Types::Content
             item.to_h
+          when Types::File
+            { role: 'user', parts: [{ file_data: { mime_type: item.mime_type, file_uri: item.uri } }] }
           else
             raise ArgumentError, "Unsupported content type: #{item.class}"
           end

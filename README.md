@@ -1,5 +1,7 @@
 # Google GenAI Ruby SDK
 
+> **Note:** This is an unofficial Ruby port of the official [Google Python SDK](https://github.com/googleapis/python-genai) for the Gemini API. This port was primarily developed with the assistance of the Gemini CLI.
+
 Welcome to the Google GenAI Ruby SDK. This library allows you to integrate Google's generative AI models, including the Gemini family, into your Ruby applications.
 
 ## Installation
@@ -30,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/google/ruby-genai.
+Bug reports and pull requests are welcome on GitHub at https://github.com/privatenote/ruby-genai.
 
 ## License
 

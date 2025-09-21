@@ -5,21 +5,20 @@ require_relative "lib/google/genai/version"
 Gem::Specification.new do |spec|
   spec.name          = "google-genai"
   spec.version       = Google::Genai::VERSION
-  spec.authors       = ["Google LLC"]
-  spec.email         = ["googleapis-packages@google.com"]
+  spec.authors       = ["Gyumin Sim"]
+  spec.email         = ["gyumin.sim@privatenote.co.kr"]
 
-  spec.summary       = "Ruby SDK for Google's Gemini API."
-  spec.description   = "This gem provides a Ruby interface for developers to integrate Google's generative models, including the Gemini family, into their applications."
-  spec.homepage      = "https://github.com/google/ruby-genai"
+  spec.summary       = "Unofficial Ruby port of the Python SDK for Google's Gemini API."
+  spec.description   = "This gem is an unofficial port of the official Google Python SDK, providing a Ruby interface for developers to integrate Google's generative models, including the Gemini family, into their applications. This port was primarily developed with the assistance of the Gemini CLI."
+  spec.homepage      = "https://github.com/privatenote/ruby-genai"
   spec.license       = "Apache-2.0"
   spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/google/ruby-genai"
-  spec.metadata["changelog_uri"] = "https://github.com/google/ruby-genai/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/privatenote/ruby-genai"
 
   # Specify which files should be added to the gem.
-  spec.files = Dir.glob("{lib}/**/*") + %w(README.md LICENSE CHANGELOG.md)
+  spec.files = Dir.glob("{lib}/**/*") + %w(README.md LICENSE)
 
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }

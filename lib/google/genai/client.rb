@@ -50,3 +50,6 @@ module Google
       def live
         @live ||= Live.new(@api_client)
       end
+    end
+  end
+end

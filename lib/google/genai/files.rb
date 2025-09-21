@@ -45,12 +45,14 @@ module Google
       end
 
       def get(name:, config: nil)
-        response = @api_client.get("v1beta/files/#{name}")
+        file_id = name.start_with?('files/') ? name.split('/').last : name
+        response = @api_client.get("v1beta/files/#{file_id}")
         Types::File.new(JSON.parse(response.body))
       end
 
       def delete(name:, config: nil)
-        @api_client.delete("v1beta/files/#{name}")
+        file_id = name.start_with?('files/') ? name.split('/').last : name
+        @api_client.delete("v1beta/files/#{file_id}")
         nil
       end
 

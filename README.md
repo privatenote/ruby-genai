@@ -22,7 +22,43 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Here's a quick example of how to upload an audio file and generate a summary.
+
+```ruby
+require 'google/genai'
+
+# The client will automatically use the GOOGLE_API_KEY or GEMINI_API_KEY environment variable.
+client = Google::Genai::Client.new
+
+# Path to your local audio file.
+audio_file_path = 'path/to/your/audio.mp4' # <--- CHANGE THIS
+
+begin
+  # Upload the file to the Gemini API.
+  # If the automatically detected MIME type is incorrect (e.g., for an MP4 audio file),
+  # you can override it like this:
+  puts "Uploading file: #{audio_file_path}..."
+  audio_file = client.files.upload(file: audio_file_path, config: { mime_type: 'audio/m4a' })
+  puts "File uploaded successfully. URI: #{audio_file.uri}"
+
+  # Ask the model to summarize the audio file.
+  puts "Generating summary..."
+  prompt = "Please provide a concise summary of this audio file."
+
+  response = client.models.generate_content(
+    model: 'gemini-2.5-flash',
+    contents: [prompt, audio_file]
+  )
+
+  # Print the summary
+  puts "\n--- Summary ---"
+  puts response.text
+  puts "---------------"
+
+rescue Google::Genai::APIError => e
+  puts "An API error occurred: #{e.message}"
+end
+```
 
 ## Development
 

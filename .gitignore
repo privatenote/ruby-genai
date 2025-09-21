@@ -1,0 +1,44 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore storage files.
+/storage/*
+!/storage/
+!/storage/.keep
+
+# Ignore .byebug_history file.
+.byebug_history
+
+# Ignore node_modules.
+/node_modules
+
+# Ignore gems.
+/vendor/bundle/
+/vendor/cache/
+/vendor/gems/
+/vendor/ruby/
+
+# Ignore gemfiles.
+/Gemfile.lock
+
+# Ignore compiled files.
+*.gem
+/pkg/*
+
+# Ignore .env file.
+.env
+
+# Ignore IDE files.
+.idea
+.vscode

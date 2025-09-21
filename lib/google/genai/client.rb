@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "api_client"
-require_relative "genai/models"
-require_relative "genai/chats"
-require_relative "genai/files"
-require_relative "genai/tunings"
-require_relative "genai/caches"
-require_relative "genai/batches"
-require_relative "genai/operations"
-require_relative "genai/tokens"
-require_relative "genai/live"
-# ... other requires will be added here
+# Zeitwerk will autoload all the required files.
 
 module Google
   module Genai
